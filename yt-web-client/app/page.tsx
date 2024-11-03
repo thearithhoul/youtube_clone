@@ -1,20 +1,23 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Image from 'next/image';
+import Link from 'next/link';
+import { getVideos } from './firebase/functions';
+import styles from './page.module.css'
 
-export default function Home() {
+
+
+export default async function Home() {
+  const videos = await getVideos();
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-      </main>
-
-    </div>
-  );
+    <main>
+      {
+        videos.map((video) => (
+          <Link href={`/watch?v=${video.filename}`}>
+            <Image src={'/thumbnail.png'} alt='video' width={120} height={80}
+              className={styles.thumbnail} />
+          </Link>
+        ))
+      }
+    </main>
+  )
 }

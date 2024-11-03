@@ -9,6 +9,7 @@ import SignIn from "./sign-in";
 import { onAUthStateChangedHelper } from "../firebase/firebase";
 import { useEffect, useState } from "react";
 import { User } from "firebase/auth";
+import Uplodad from "./upload";
 
 // JavaScript Closure (keyword search leater)
 
@@ -29,6 +30,9 @@ export default function Navbar() {
             <Link href='/' >
                 <Image width={90} height={20} src="/YouTube_Logo.svg" alt="YouTube Logo" />
             </Link>
+            {
+                user && <Uplodad />
+            }
             <SignIn user={user} />
         </nav >
     );
